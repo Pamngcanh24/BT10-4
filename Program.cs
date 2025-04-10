@@ -21,13 +21,14 @@ builder.Services.AddScoped<IProductService, ProductService>();
 // ✅ Cấu hình CORS (để gọi từ AJAX)
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
+    options.AddPolicy("AllowFrontend", builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "http://127.0.0.1:5500") // sửa theo port của bạn
+        builder.WithOrigins("http://localhost", "http://localhost:5500", "http://127.0.0.1:5500")
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
 });
+
 
 // ✅ Cấu hình JWT Authentication
 var key = Encoding.ASCII.GetBytes("super-secret-key-demo-1234567890");
